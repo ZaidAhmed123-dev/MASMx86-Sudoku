@@ -29,6 +29,8 @@ dashingBoi BYTE "---------------------", 0
 columnBar BYTE "| ", 0
 
 ROCK BYTE "--- HARD DIFFICULTY ---", 0
+YAOI BYTE "--- EASY DIFFICULTY ---", 0
+YURI BYTE "-- MEDIUM DIFFICULTY --", 0
 
 draco BYTE "Number entered was Incorrect. Retry!", 0
 
@@ -43,6 +45,11 @@ currMode DWORD 0            ; 1=Easy, 2=Medium, 3=Hard
 txtScore BYTE "Current frfr: ", 0
 txtPts byte " Points", 0
 finalScoreMsg BYTE "Total Score: ", 0
+
+Replay BYTE "Do You Wish to Replay? Y/N", 0
+
+Stoner BYTE 2 DUP(?)
+
 
 .code
 main PROC
@@ -62,7 +69,11 @@ swig:
 
     call Randomize
     
-    mov ecx, 12
+    mov eax, 13
+    call RandomRange
+    add eax, 12
+    mov ecx, eax
+    mov eax, 0
 
 idk:
 
@@ -244,6 +255,22 @@ Hard:
     jmp ikhtitam
 
 ikhtitam:
+
+mov edx, OFFSET Replay
+call writeString
+
+mov eax, 0
+
+call readChar
+
+mov Stoner, al
+
+cmp Stoner, "Y"
+je swig
+
+cmp Stoner, "N"
+jne ikhtitam
+
 
 call exitprocess
 main ENDP
@@ -766,6 +793,7 @@ g:
     cmp eax, esi
     je SkipScoreUpdate
 
+    mov edx, DWORD PTR manual[ebx*4]
     mov DWORD PTR manual[ebx*4], esi
     call UpdateScore
 
@@ -834,7 +862,6 @@ CompareArrays ENDP
 ;_________________________________________________________
 PrinterKiDukan PROC
 ;_________________________________________________________
-    call ClrScr
 
     mov edx, OFFSET txtScore
     call WriteString
@@ -911,6 +938,9 @@ PrinterKiDukan ENDP
 HardShi PROC
     call ClrScr 
 whiler:    
+    mov edx, OFFSET ROCK
+    call writeString
+    call crlf
     call PrinterKiDukan
     call TakeInput
     push 0          
@@ -941,8 +971,11 @@ HardShi ENDP
 ;----------------------------------------------
 
 EasyShi PROC
-YEAT:
     call ClrScr
+YEAT:
+    mov edx, OFFSET YAOI
+    call writeString
+    call crlf
     call PrinterKiDukan
     call TakeInput
     mov eax, 0
@@ -955,13 +988,14 @@ YEAT:
     call Crlf
     mov  eax, 2000
     call Delay
-    
+    call clrscr
 
 skipper:
     push 0
     push offset manual
     push offset solved_array
     call CompareArrays
+    call clrscr
 
     cmp eax, 1
     jne YEAT
@@ -982,7 +1016,7 @@ EasyShi ENDP
 ;_________________________________________________________
 EHints PROC
 ;_________________________________________________________
-    push ebp
+       push ebp
     mov  ebp, esp
     push esi
     push edi
@@ -1000,8 +1034,7 @@ CheckLoop:
     mov  ebx, [esi]
     cmp  ebx, [edi]
     je   CorrectValue
-
-    mov  dword ptr [esi], 0
+    mov  dword ptr [esi], edx
     mov  eax, 1  
 
 CorrectValue:
@@ -1265,9 +1298,11 @@ MHints ENDP
 MediumShi Proc
 push ebp
 mov ebp, esp
-
-while_M:
     call clrscr
+while_M:
+    mov edx, OFFSET YURI
+    call writeString
+    call crlf
     call PrinterKiDukan
     call TakeInput
     
@@ -1277,6 +1312,7 @@ while_M:
     push offset manual
     push offset solved_array
     call CompareArrays
+    call clrscr
     cmp eax, 1
     jne while_M
 
