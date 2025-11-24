@@ -949,6 +949,7 @@ whiler:
     call CompareArrays
 
     cmp eax, 1
+    call clrscr
     jne whiler
 
     mov edx, offset doneMsgH
