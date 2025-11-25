@@ -787,7 +787,6 @@ g:
 
     cmp DWORD PTR partial[ebx*4], 0
     jne gng
-
     
     mov eax, DWORD PTR manual[ebx*4]
     cmp eax, esi
@@ -1180,7 +1179,7 @@ col_loop1:
 
         mov edi, eax               
         imul edi, 9                
-        add edi, ebx                
+        add edi, ebx                ; row*9+col
 
         ;fullness check
         cmp DWORD ptr [esi + edi*4], 0          
