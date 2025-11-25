@@ -268,6 +268,7 @@ mov Stoner, al
 cmp Stoner, "Y"
 je swig
 
+call crlf
 cmp Stoner, "N"
 jne ikhtitam
 
