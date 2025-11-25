@@ -34,11 +34,11 @@ YURI BYTE "-- MEDIUM DIFFICULTY --", 0
 
 draco BYTE "Number entered was Incorrect. Retry!", 0
 
-errorRowMsg BYTE "There is an error in Row: ",0
-errorColMsg BYTE "There is an error in Column: ",0
-doneMsg BYTE "Puzzle solved in Medium Mode!",0
-doneMsgE BYTE "Puzzle solved in Easy Mode!",0
-doneMsgH BYTE "Puzzle solved in Hard Mode!",0
+errorRowMsg BYTE "WOAAAAAAAHHHH There is an error in Row: ",0
+errorColMsg BYTE "WOAAAAAAAHHHH There is an error in Column: ",0
+doneMsg BYTE "GG! Puzzle solved in Medium Mode!",0
+doneMsgE BYTE "GG! Puzzle solved in Easy Mode!",0
+doneMsgH BYTE "GG! Puzzle solved in Hard Mode!",0
 
 score SDWORD 0              
 currMode DWORD 0            ; 1=Easy, 2=Medium, 3=Hard
