@@ -16,7 +16,7 @@ spa db " ",0
 
 choice BYTE "Choose a Mode (1 for Easy, 2 for Medium and 3 for Hard): ", 0
 
-Incorrect BYTE "This Shit was lowkey WRONG! ", 0
+Incorrect BYTE "Input is WRONG! ", 0
 Works BYTE "YAYYYY!!!", 0
 
 Bestie BYTE "Enter Position for x (Row from 1-9): ", 0
